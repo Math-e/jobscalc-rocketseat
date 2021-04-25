@@ -1,8 +1,9 @@
 const Profile = require('../model/Profile')
+const Language = require('./LangController')
 
 module.exports = {
     async index(req, res) {
-        return res.render("profile", { profile: await Profile.get() })//puxa data do model Profile
+        return res.render("profile", { profile: await Profile.get(), lang: Language.get() })//puxa data do model Profile
     },
 
     async update(req, res) {

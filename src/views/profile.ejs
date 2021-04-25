@@ -32,26 +32,26 @@
         <img src="<%= profile.avatar %> " alt="<%= profile.name %> ">
         <h2><%= profile.name %> </h2>
         <p>
-          O valor da sua hora é <br/>
+          <%= lang.your_value_hour_is %><br/>
           <strong>R$<%= profile["value-hour"].toFixed(2).replace('.',',') %> </strong>
         </p>
-        <button class="button green" form="form-profile" type="submit">Salvar dados</button>
+        <button class="button green" form="form-profile" type="submit"><%= lang.save_data %> </button>
       </aside>
       <main>
 
         <form id="form-profile" method="post" action="/profile">
           <fieldset>
-            <legend>Dados do perfil</legend>
+            <legend><%= lang.profile_data %></legend>
             <div class="separator light"></div>
 
             <div class="input-group">
               <div class="input-wrapper">
-                <label for="name">Nome</label>
+                <label for="name"><%= lang.name_2 %> </label>
                 <input type="text" id="name" name="name" value="<%= profile.name %>" />
               </div>
 
               <div class="input-wrapper">
-                <label for="avatar">Link da foto</label>
+                <label for="avatar"><%= lang.photo_link %> </label>
                 <input 
                 placeholder="https://"
                 type="url" 
@@ -63,12 +63,12 @@
           </fieldset>
 
           <fieldset>
-            <legend>Planejamento</legend>
+            <legend><%= lang.planning %> </legend>
             <div class="separator light"> </div>
 
             <div class="input-group">
               <div class="input-wrapper">
-                <label for="monthly-budget">Quanto eu <br/>quero ganhar por mês?</label>
+                <label for="monthly-budget"><%= lang.how_much_i_want_income %> </label>
                 <input 
                   type="amount"
                   step="0.1" 
@@ -79,8 +79,7 @@
               </div>
 
               <div class="input-wrapper">
-                <label for="hours-per-day">Quantas horas <br/>
-                  quero trabalhar por dia?</label>
+                <label for="hours-per-day"><%= lang.how_many_work_per_day %> </label>
                 <input 
                   type="number"
                   id="hours-per-day" 
@@ -91,8 +90,7 @@
 
             <div class="input-group">
               <div class="input-wrapper">
-                <label for="days-per-week">Quantos dias <br/>quero
-                  trabalhar por semana?</label>
+                <label for="days-per-week"><%= lang.how_many_days_week %> </label>
                 <input
                   type="number"
                   id="days-per-week" 
@@ -101,8 +99,7 @@
               </div>
 
               <div class="input-wrapper">
-                <label for="vacation-per-year">Quantas semanas <br/>
-                  por ano você quer tirar férias?</label>
+                <label for="vacation-per-year"><%= lang.how_many_weeks_vacation %> </label>
                 <input 
                   type="number" 
                   id="vacation-per-year" 

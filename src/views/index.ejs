@@ -30,15 +30,25 @@
         <section id="top" class="animate-up">
           <h2 class="sr-only">Homepage</h2>
           <img id="logo" src="/images/logo.svg" alt="Logo" />
+
+          <form id="langChange" action="/lang" method="post">
+            <fieldset>
+              <select id="lang" onchange=this.form.submit() name="lang">
+                <option <% if(lang.id=="en"){ %> selected <% } %> value="en">English</option>
+                <option <% if(lang.id=="pt-br"){ %> selected <% } %> value="pt-br">Português Brasileiro</option>
+              </select>
+            </fieldset>
+          </form>
+
           <span id="notification">
             <img src="./images/alert-octagon.svg" alt="Alerta" />
             <% if(freeHours <= 0){ %> 
-            Você não tem horas livres
+            <%= lang.no_free_hours %>
             <% } else { %> 
-            Você tem <%= freeHours %>  horas livres no seu dia<% } %>
+            <%= freeHours %><%= lang.has_free_hours %> <% } %>
           </span>
           <a href="/profile" id="avatar-profile">
-            <p><%= profile.name %></p> <span>Ver perfil</span></p>
+            <p><%= profile.name %></p> <span><%= lang.view_profile %> </span></p>
             <img src="<%= profile.avatar %>" />
           </a>
         </section>
@@ -51,22 +61,22 @@
           <div class="info">
             <div class="total">
               <strong><%= statusCount.total %></strong>
-              Projetos ao total
+              <%= lang.total_projects %> 
             </div>
             <div class="in-progress">
               <strong><%= statusCount.progress %> </strong>
-              Em andamento
+              <%= lang.in_progress %> 
             </div>
             <div class="finished">
               <strong><%= statusCount.done %> </strong>
-              Encerrados
+              <%= lang.finished %> 
             </div>
           </div>
           <a class="button orange" href="/job">
             <span>
-              <img src="./images/plus-24.svg" alt="Novo Job" /> 
-            </span>
-            Adicionar novo job
+              <img src="./images/plus-24.svg" alt="<%= lang.add_new_job %> " /> 
+            </span> 
+            <%= lang.add_new_job %> 
           </a>
         </section>
       </div>
@@ -79,7 +89,7 @@
         <div class="cards">
           <% jobs.forEach((job) => { %> 
           <div class="card <%= job.status  %> " data-id="<%= job.id  %> ">
-            <div class="id column">1</div>
+            <div class="id column"><%= job.id %> </div>
             <div class="name column">
               <%= job.name %>
             </div>
@@ -95,7 +105,7 @@
               <p>R$<%= job.budget.toFixed(2).replace('.', ',') %> </p>
             </div>
             <div class="status badge column">
-              <%= job.status === 'done' ? 'Encerrado' : 'Em andamento'  %> 
+              <%= job.status === 'done' ? lang.closed : lang.in_progress  %> 
             </div>
             <div class="actions column flex">
               <p class="sr-only">Ações</p>
@@ -105,8 +115,8 @@
                 title="Editar Job">
                 <img src="./images/edit-24.svg" alt="Editar Job" />
               </a>
-              <button class="delete button white" title="Excluir Job">
-                <img src="./images/trash-24.svg" alt="Excluir Job" />
+              <button class="delete button white" title="<%= lang.delete_job %>">
+                <img src="./images/trash-24.svg" alt="<%= lang.delete_job %>" />
               </button>
             </div>
           </div>
@@ -119,19 +129,18 @@
 
     <div class="modal-wrapper">
       <div class="modal">
-        <img src="./images/trash-48.svg" alt="Excluir Job" title="Excluir Job" />
-        <h3>Excluir Job</h3>
-        <p>Quer mesmo excluir esse job? <br/>
-        Ele será apagado para sempre.  
+        <img src="./images/trash-48.svg" alt="<%= lang.delete_job %>" title="<%= lang.delete_job %>" />
+        <h3><%= lang.delete_job %></h3>
+        <%= lang.confirm_delete_job %> 
         <p>
         <footer>
           <a 
             class="button gray" 
-            href="#">Cancelar</a>
+            href="#"><%= lang.cancel %> </a>
           <button
             class="button red"
             type="submit"
-            form="delete-job">Excluir Job</button>
+            form="delete-job"><%= lang.delete_job %> </button>
         </footer>
       </div>
       <form 

@@ -3,6 +3,7 @@ const routes = express.Router()
 const ProfileController = require('./controllers/ProfileController')
 const JobController = require('./controllers/JobController')
 const DashboardController = require('./controllers/DashboardController')
+const LangController = require('./controllers/LangController')
 //const views = __dirname + "/views/"
 
 routes.get('/', DashboardController.index)//pagina principal
@@ -14,5 +15,6 @@ routes.post('/job/delete/:id', JobController.delete)//confirmar excluir job
 routes.get('/profile', ProfileController.index)//ver perfil
 routes.post('/profile', ProfileController.update)//confirmar editar perfil
 
+routes.post('/lang', LangController.update)//configurar idioma
  
 module.exports = routes;

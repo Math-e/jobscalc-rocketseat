@@ -1,6 +1,8 @@
 const Job = require('../model/Job')
 const Profile = require('../model/Profile')
 const JobUtils = require('../utils/jobUtils')
+const Language = require('./LangController')
+
 module.exports = {
     async index(req, res) {
         const jobGet = await Job.get()
@@ -21,7 +23,7 @@ module.exports = {
 
             //soma de status
             statusCount[status]++
-            
+
             //soma de horas trabalhadas por dia
             jobTotalHours = status == 'progress' ? jobTotalHours += Number(job['daily-hours']) : jobTotalHours
             //if(status === 'progress') jobTotalHours += Number(job['daily-hours'])
@@ -36,7 +38,12 @@ module.exports = {
 
         const freeHours = profileGet["hours-per-day"] - jobTotalHours
 
-
-        return res.render("index", { jobs: updatedJobs, profile: profileGet, statusCount: statusCount, freeHours: freeHours })
+        return res.render("index", {
+            jobs: updatedJobs,
+            profile: profileGet,
+            statusCount: statusCount,
+            freeHours: freeHours,
+            lang: Language.get()
+        })
     }
 }

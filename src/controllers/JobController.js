@@ -1,10 +1,11 @@
 const Job = require('../model/Job')
 const JobUtils = require('../utils/jobUtils')
 const Profile = require('../model/Profile')
+const Language = require('./LangController')
 
 module.exports = {
     create(req, res) {//pagina criar job
-        return res.render("job")
+        return res.render("job", {lang: Language.get()})
     },
 
     async save(req, res) {//criar novo job
@@ -34,7 +35,7 @@ module.exports = {
 
         job.budget = JobUtils.calculateBudget(job, profile["value-hour"])
 
-        return res.render("job-edit", { job })
+        return res.render("job-edit", { job, lang: Language.get() })
     },
 
     async update(req, res) {
